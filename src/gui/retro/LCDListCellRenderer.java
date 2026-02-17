@@ -28,7 +28,8 @@ public class LCDListCellRenderer extends BaseLCDListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected,
             boolean cellHasFocus) {
-        // If a secondary provider is supplied, render a two-column component from the base class.
+        // If a secondary provider is supplied, render a two-column component from the
+        // base class.
         if (secondaryProvider != null) {
             String primary = (value == null) ? "" : labelProvider.apply(value);
             String secondary = (value == null) ? "" : secondaryProvider.apply(value);
@@ -39,7 +40,7 @@ public class LCDListCellRenderer extends BaseLCDListCellRenderer {
         super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         String text = (value == null) ? "" : labelProvider.apply(value);
         setText(text);
-        applySingleLabelStyle(this, isSelected);
+        applySingleLabelStyle(this, isSelected, index);
         return this;
     }
 }

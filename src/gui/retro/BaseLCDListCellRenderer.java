@@ -48,14 +48,19 @@ public abstract class BaseLCDListCellRenderer extends DefaultListCellRenderer {
     /**
      * Apply the standard single-label LCD look to a renderer component.
      * Call from subclasses that render directly using the DefaultListCellRenderer.
+     *
+     * Uses the row index to alternate background color when the row is not
+     * selected (keeps selected color precedence).
      */
-    protected void applySingleLabelStyle(Component rendererComponent, boolean isSelected) {
+    protected void applySingleLabelStyle(Component rendererComponent, boolean isSelected, int index) {
         rendererComponent.setFont(LCD_FONT);
         if (rendererComponent instanceof JComponent) {
             JComponent jc = (JComponent) rendererComponent;
             jc.setOpaque(true);
-            jc.setBackground(isSelected ? LCD_BACKGROUND_SELECTED : LCD_BACKGROUND);
-            jc.setForeground(isSelected ? LCD_TEXT_SELECTED : LCD_TEXT);
+            Color bgColor = isSelected ? LCD_BACKGROUND_SELECTED : (index % 2 == 0 ? LCD_BACKGROUND : LCD_BACKGROUND_ALT);
+            Color fgColor = isSelected ? LCD_TEXT_SELECTED : LCD_TEXT;
+            jc.setBackground(bgColor);
+            jc.setForeground(fgColor);
         }
     }
 }

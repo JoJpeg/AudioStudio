@@ -118,49 +118,51 @@ public class AudioStudio implements ActionListener {
         songList = new JList<>(songListModel);
         songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         songList.setCellRenderer(new LCDListCellRenderer(
-            o -> {
-                if (!(o instanceof SongData)) return "";
-                SongData song = (SongData) o;
+                o -> {
+                    if (!(o instanceof SongData))
+                        return "";
+                    SongData song = (SongData) o;
 
-                ArrayList<ProjectArtistData> projectArtists = song.getOwners();
-                StringBuilder b = new StringBuilder();
+                    ArrayList<ProjectArtistData> projectArtists = song.getOwners();
+                    StringBuilder b = new StringBuilder();
 
-                String displayText = "";
+                    String displayText = "";
 
-                if (projectArtists != null && !projectArtists.isEmpty()) {
-                    for (ProjectArtistData pa : projectArtists) {
-                        if (b.length() > 0) b.append(", ");
-                        b.append(pa.getName());
-                    }
-                    displayText += b.toString() + " - ";
-                } else {
-                    if (song.getGuessedArtist() != null && !song.getGuessedArtist().isEmpty()) {
-                        displayText += song.getGuessedArtist() + " - ";
+                    if (projectArtists != null && !projectArtists.isEmpty()) {
+                        for (ProjectArtistData pa : projectArtists) {
+                            if (b.length() > 0)
+                                b.append(", ");
+                            b.append(pa.getName());
+                        }
+                        displayText += b.toString() + " - ";
                     } else {
-                        displayText += "Unknown Artist - ";
+                        if (song.getGuessedArtist() != null && !song.getGuessedArtist().isEmpty()) {
+                            displayText += song.getGuessedArtist() + " - ";
+                        } else {
+                            displayText += "Unknown Artist - ";
+                        }
                     }
-                }
 
-                displayText += song.getTitle() != null ? song.getTitle() : "Unknown";
+                    displayText += song.getTitle() != null ? song.getTitle() : "Unknown";
 
-                if (displayText.equals("Unknown Artist - Unknown")) {
-                    String filePath = song.getFilePath();
-                    displayText = filePath != null ? new java.io.File(filePath).getName() : "Unknown";
-                }
+                    if (displayText.equals("Unknown Artist - Unknown")) {
+                        String filePath = song.getFilePath();
+                        displayText = filePath != null ? new java.io.File(filePath).getName() : "Unknown";
+                    }
 
-                return displayText;
-            },
-            o -> {
-                if (!(o instanceof SongData)) return "";
-                long duration = ((SongData) o).getDurationSeconds();
-                if (duration > 0) {
-                    long minutes = duration / 60;
-                    long seconds = duration % 60;
-                    return String.format("%02d:%02d", minutes, seconds);
-                }
-                return "";
-            }
-        ));
+                    return displayText;
+                },
+                o -> {
+                    if (!(o instanceof SongData))
+                        return "";
+                    long duration = ((SongData) o).getDurationSeconds();
+                    if (duration > 0) {
+                        long minutes = duration / 60;
+                        long seconds = duration % 60;
+                        return String.format("%02d:%02d", minutes, seconds);
+                    }
+                    return "";
+                }));
         songList.setBackground(LCD_BACKGROUND);
         songList.setFixedCellHeight(32); // Ensure consistent row height
         songList.addListSelectionListener(e -> {

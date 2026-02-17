@@ -1,14 +1,15 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GlobalData extends Data {
     public String guiStyle;
     public ArrayList<PlaylistData> playlists;
     public ArrayList<ProjectArtistData> projectsArtists;
-    public ArrayList<SongData> songs;
+    public HashMap<String, SongData> songs;
     public ArrayList<String> trackedFolders;
-    transient Object sortedByObject = null;
+    public Object sortedByObject; // can be a playlist or a project/artist, used to sort the songs list in the UI
 
     public String getGuiStyle() {
         return guiStyle;
@@ -23,7 +24,19 @@ public class GlobalData extends Data {
     }
 
     public ArrayList<SongData> getSongs() {
-        return songs;
+        if (songs != null) {
+            return new ArrayList<>(songs.values());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public SongData getSong(String filePath) {
+        if (songs != null) {
+            return songs.get(filePath);
+        } else {
+            return null;
+        }
     }
 
     public ArrayList<String> getTrackedFolders() {
@@ -42,21 +55,19 @@ public class GlobalData extends Data {
         this.projectsArtists = projectsArtists;
     }
 
-    public void setSongs(ArrayList<SongData> songs) {
-        this.songs = songs;
-    }
-
     public void setTrackedFolders(ArrayList<String> trackedFolders) {
         this.trackedFolders = trackedFolders;
     }
 
     public ArrayList<SongData> getSongsSorted() {
+
+        ArrayList<SongData> songsList = getSongs();
         if (sortedByObject instanceof PlaylistData) {
-            return ((PlaylistData) sortedByObject).getSongs();
+            return getSongsByPaths(((PlaylistData) sortedByObject).getSongPaths());
         } else if (sortedByObject instanceof ProjectArtistData) {
-            return ((ProjectArtistData) sortedByObject).getSongs();
+            return getSongsByPaths(((ProjectArtistData) sortedByObject).getSongPaths());
         } else {
-            return songs;
+            return songsList;
         }
     }
 
@@ -64,11 +75,17 @@ public class GlobalData extends Data {
         this.sortedByObject = sortedByObject;
     }
 
-    public void addSong(SongData newSong) {
+    public void putSong(SongData newSong) {
         if (songs == null) {
-            songs = new ArrayList<>();
+            songs = new HashMap<>();
         }
-        songs.add(newSong);
+        songs.put(newSong.getFilePath(), newSong);
+    }
+
+    public void removeSongByPath(String filePath) {
+        if (songs != null) {
+            songs.remove(filePath);
+        }
     }
 
     public void addPlaylist(PlaylistData newPlaylist) {
@@ -94,7 +111,7 @@ public class GlobalData extends Data {
 
     public void removeSong(SongData songToRemove) {
         if (songs != null) {
-            songs.remove(songToRemove);
+            songs.remove(songToRemove.getFilePath());
         }
     }
 
@@ -114,6 +131,31 @@ public class GlobalData extends Data {
         if (trackedFolders != null) {
             trackedFolders.remove(folderToRemove);
         }
+    }
+
+    private ArrayList<SongData> getSongsByPaths(ArrayList<String> paths) {
+        ArrayList<SongData> result = new ArrayList<>();
+        if (songs != null) {
+            for (String path : paths) {
+                SongData song = getSongByPath(path);
+                if (song != null) {
+                    result.add(song);
+                }
+            }
+        }
+        return result;
+    }
+
+    private SongData getSongByPath(String path) {
+        ArrayList<SongData> songs = getSongs();
+        if (songs != null) {
+            for (SongData song : songs) {
+                if (song.getFilePath().equals(path)) {
+                    return song;
+                }
+            }
+        }
+        return null;
     }
 
 }

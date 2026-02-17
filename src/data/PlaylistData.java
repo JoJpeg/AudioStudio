@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class PlaylistData extends Data {
     String title;
-    ArrayList<SongData> songs; //TODO: save only a reference to the song, currentyl serialiting creates a vicious loop
-    Note note;
+    ArrayList<String> songPaths; //TODO: save only a reference to the song, currentyl serialiting creates a vicious loop
+    Note note; 
+    
 
-    public ArrayList<SongData> getSongs() {
-        return songs;
+    public PlaylistData() {
     }
 
     public Note getNote() {
@@ -20,9 +20,10 @@ public class PlaylistData extends Data {
         return title;
     }
 
-    public void setSongs(ArrayList<SongData> songs) {
-        this.songs = songs;
+    public ArrayList<String> getSongPaths() {
+        return songPaths;
     }
+ 
 
     public void setNote(Note note) {
         this.note = note;
@@ -33,15 +34,15 @@ public class PlaylistData extends Data {
     }
 
     public void addSong(SongData newSong) {
-        if (songs == null) {
-            songs = new ArrayList<>();
+        if (songPaths == null) {
+            songPaths = new ArrayList<>();
         }
-        songs.add(newSong);
+        songPaths.add(newSong.getFilePath());
     }
 
     public void removeSong(SongData songToRemove) {
-        if (songs != null) {
-            songs.remove(songToRemove);
+        if (songPaths != null) {
+            songPaths.remove(songToRemove.getFilePath());
         }
     }
 

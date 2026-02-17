@@ -1,36 +1,22 @@
 package gui.retro;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JWindow;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import static gui.retro.RetroTheme.HEADER_BACKGROUND;
+import static gui.retro.RetroTheme.HEADER_BORDER;
+import static gui.retro.RetroTheme.HEADER_BUTTON_FONT;
+import static gui.retro.RetroTheme.HEADER_BUTTON_HOVER;
+import static gui.retro.RetroTheme.HEADER_BUTTON_TEXT;
+import static gui.retro.RetroTheme.HEADER_CLOSE_HOVER_BG;
+import static gui.retro.RetroTheme.HEADER_FONT;
+import static gui.retro.RetroTheme.HEADER_TEXT;
+import static gui.retro.RetroTheme.LCD_BACKGROUND;
+import static gui.retro.RetroTheme.LCD_BORDER;
+import static gui.retro.RetroTheme.WINDOW_BACKGROUND;
+import static gui.retro.RetroTheme.WINDOW_BORDER;
 
-import application.ApplicationResources;
-import audioPlayer.AudioPlayer;
-import data.DataManager;
-import data.FileManager;
-import data.SongData;
-import data.PlaylistData;
-import data.ProjectArtistData;
-import javax.swing.JTabbedPane;
-import javax.swing.JOptionPane;
-import static gui.retro.RetroTheme.*;
-
-import java.util.Date;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +24,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JWindow;
+import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
+
+import application.ApplicationResources;
+import data.FileManager;
+import data.ProjectArtistData;
+import data.SongData;
 
 public class AudioStudio implements ActionListener {
     ApplicationResources app;
@@ -52,22 +59,8 @@ public class AudioStudio implements ActionListener {
 
     SongData lastData = null;
 
-    // Group list (Playlists / Projects) - left rack
-    JTabbedPane groupTabs;
-    RetroRackPanel groupsRack;
-    JList<PlaylistData> playlistList;
-    DefaultListModel<PlaylistData> playlistListModel;
-    JList<ProjectArtistData> projectList;
-    DefaultListModel<ProjectArtistData> projectListModel;
-    javax.swing.JPanel tabActionPanel; // holds tab-specific action buttons (extensible)
-    RetroActionButton newPlaylistButton;
-    RetroActionButton newProjectButton;
-    RetroActionButton editButton;
-    RetroActionButton deleteButton;
-    RetroActionButton showAllButton;
-    // single compact actions menu
-    RetroActionButton actionMenuButton;
-    JPopupMenu actionPopupMenu;
+    // Group list (Playlists / Projects) - left rack (moved to GroupRack)
+    GroupRack groupRack;
 
     // Timer for updating timeline
     private Timer timelineUpdateTimer;
@@ -124,7 +117,50 @@ public class AudioStudio implements ActionListener {
         refreshSongList();
         songList = new JList<>(songListModel);
         songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        songList.setCellRenderer(new SongListCellRenderer());
+        songList.setCellRenderer(new LCDListCellRenderer(
+            o -> {
+                if (!(o instanceof SongData)) return "";
+                SongData song = (SongData) o;
+
+                ArrayList<ProjectArtistData> projectArtists = song.getOwners();
+                StringBuilder b = new StringBuilder();
+
+                String displayText = "";
+
+                if (projectArtists != null && !projectArtists.isEmpty()) {
+                    for (ProjectArtistData pa : projectArtists) {
+                        if (b.length() > 0) b.append(", ");
+                        b.append(pa.getName());
+                    }
+                    displayText += b.toString() + " - ";
+                } else {
+                    if (song.getGuessedArtist() != null && !song.getGuessedArtist().isEmpty()) {
+                        displayText += song.getGuessedArtist() + " - ";
+                    } else {
+                        displayText += "Unknown Artist - ";
+                    }
+                }
+
+                displayText += song.getTitle() != null ? song.getTitle() : "Unknown";
+
+                if (displayText.equals("Unknown Artist - Unknown")) {
+                    String filePath = song.getFilePath();
+                    displayText = filePath != null ? new java.io.File(filePath).getName() : "Unknown";
+                }
+
+                return displayText;
+            },
+            o -> {
+                if (!(o instanceof SongData)) return "";
+                long duration = ((SongData) o).getDurationSeconds();
+                if (duration > 0) {
+                    long minutes = duration / 60;
+                    long seconds = duration % 60;
+                    return String.format("%02d:%02d", minutes, seconds);
+                }
+                return "";
+            }
+        ));
         songList.setBackground(LCD_BACKGROUND);
         songList.setFixedCellHeight(32); // Ensure consistent row height
         songList.addListSelectionListener(e -> {
@@ -160,116 +196,33 @@ public class AudioStudio implements ActionListener {
         openButton.addActionListener(this);
         filesRack.add(openButton, BorderLayout.SOUTH);
 
-        // Create groups rack (left) with Playlists / Projects tabs
-        groupsRack = new RetroRackPanel(new BorderLayout(2, 2));
-        groupsRack.setPreferredSize(new Dimension(220, 0));
+        // Create groups rack (left)
+        groupRack = new GroupRack(app, mainWindow, this::refreshSongList);
 
-        groupTabs = new JTabbedPane();
-
-        // Playlists tab
-        playlistListModel = new DefaultListModel<>();
-        playlistList = new JList<>(playlistListModel);
-        playlistList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        // LCD-style renderer (uses RetroTheme)
-        playlistList.setCellRenderer(new LCDListCellRenderer(o -> {
-            PlaylistData p = (PlaylistData) o;
-            return p.getTitle() != null ? p.getTitle() : "(untitled)";
-        }));
-        playlistList.setFixedCellHeight(28);
-        playlistList.setBackground(LCD_BACKGROUND);
-        playlistList.setOpaque(true);
-        playlistList.addListSelectionListener(ev -> {
-            if (!ev.getValueIsAdjusting()) {
-                PlaylistData sel = playlistList.getSelectedValue();
-                if (sel != null) {
-                    app.data.setSortedByObject(sel);
-                    projectList.clearSelection();
-                    refreshSongList();
+        // wire up SongLCDPanel clicks: open folder and jump to project
+        gui.retro.SongLCDPanel songPanel = transportRack.getSongPanel();
+        songPanel.setOnFileClick(path -> {
+            try {
+                File f = new File(path);
+                File dir = f.isDirectory() ? f : f.getParentFile();
+                if (dir != null && dir.exists() && Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(dir);
+                } else {
+                    JOptionPane.showMessageDialog(mainWindow, "Folder not found: " + path, "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(mainWindow, "Unable to open folder: " + ex.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        songPanel.setOnOwnerClick(pa -> {
+            if (pa != null) {
+                groupRack.selectProject(pa);
             }
         });
 
-        JScrollPane playlistScroll = new JScrollPane(playlistList);
-        playlistScroll.getViewport().setBackground(LCD_BACKGROUND);
-        playlistScroll.setBorder(BorderFactory.createLineBorder(LCD_BORDER, 1));
-        groupTabs.addTab("Playlists", playlistScroll);
-
-        // Projects tab
-        projectListModel = new DefaultListModel<>();
-        projectList = new JList<>(projectListModel);
-        projectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        projectList.setCellRenderer(new LCDListCellRenderer(o -> {
-            ProjectArtistData pa = (ProjectArtistData) o;
-            return pa.getName() != null ? pa.getName() : "(unnamed)";
-        }));
-        projectList.setFixedCellHeight(28);
-        projectList.setBackground(LCD_BACKGROUND);
-        projectList.setOpaque(true);
-        projectList.addListSelectionListener(ev -> {
-            if (!ev.getValueIsAdjusting()) {
-                ProjectArtistData sel = projectList.getSelectedValue();
-                if (sel != null) {
-                    app.data.setSortedByObject(sel);
-                    playlistList.clearSelection();
-                    refreshSongList();
-                }
-            }
-        });
-
-        JScrollPane projectScroll = new JScrollPane(projectList);
-        projectScroll.getViewport().setBackground(LCD_BACKGROUND);
-        projectScroll.setBorder(BorderFactory.createLineBorder(LCD_BORDER, 1));
-        groupTabs.addTab("Projects", projectScroll);
-
-        // add the tabbed pane directly (list backgrounds are now LCD-styled)
-        groupsRack.add(groupTabs, BorderLayout.CENTER);
-
-        // Action panel (dynamically updated per-tab) — uses RetroActionButton and is
-        // extensible
-        tabActionPanel = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 2));
-        tabActionPanel.setOpaque(false);
-        tabActionPanel.setBorder(BorderFactory.createEmptyBorder(1, 2, 1, 2));
-
-        // action buttons (shared instances reused by updateTabActions)
-        newPlaylistButton = new RetroActionButton("New Playlist");
-        newPlaylistButton.addActionListener(this);
-        newProjectButton = new RetroActionButton("New Project");
-        newProjectButton.addActionListener(this);
-        editButton = new RetroActionButton("Edit");
-        editButton.addActionListener(this);
-        deleteButton = new RetroActionButton("Delete");
-        deleteButton.addActionListener(this);
-        showAllButton = new RetroActionButton("All");
-        showAllButton.addActionListener(evt -> {
-            app.data.setSortedByObject(null);
-            playlistList.clearSelection();
-            projectList.clearSelection();
-            refreshSongList();
-        });
-
-        // compact Actions menu button
-        actionMenuButton = new RetroActionButton("Actions");
-        actionPopupMenu = new JPopupMenu();
-        actionMenuButton.addActionListener(evt -> showActionMenu(actionMenuButton));
-
-        // switch tab listener to swap actions
-        groupTabs.addChangeListener(ev -> updateTabActions());
-
-        // place the action panel
-        groupsRack.add(tabActionPanel, BorderLayout.SOUTH);
-
-        // populate lists
-        refreshPlaylistList();
-        refreshProjectList();
-
-        // ensure actions match initial tab
-        updateTabActions();
-
-        // populate lists
-        refreshPlaylistList();
-        refreshProjectList();
-
-        contentPanel.add(groupsRack, BorderLayout.WEST);
+        contentPanel.add(groupRack.getPanel(), BorderLayout.WEST);
         contentPanel.add(filesRack, BorderLayout.CENTER);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
@@ -483,183 +436,11 @@ public class AudioStudio implements ActionListener {
         }
     }
 
-    public void refreshPlaylistList() {
-        if (playlistListModel == null)
-            return;
-        playlistListModel.clear();
-        if (app.data != null && app.data.getPlaylists() != null) {
-            for (PlaylistData p : app.data.getPlaylists()) {
-                playlistListModel.addElement(p);
-            }
-        }
-    }
-
-    public void refreshProjectList() {
-        if (projectListModel == null)
-            return;
-        projectListModel.clear();
-        if (app.data != null && app.data.getProjectsArtists() != null) {
-            for (ProjectArtistData pa : app.data.getProjectsArtists()) {
-                projectListModel.addElement(pa);
-            }
-        }
-    }
-
-    /* ---------------------- Group action helpers & popup ---------------------- */
-    private void createNewPlaylist() {
-        String name = JOptionPane.showInputDialog(mainWindow, "Playlist name:", "New Playlist",
-                JOptionPane.PLAIN_MESSAGE);
-        if (name != null && !name.trim().isEmpty()) {
-            PlaylistData pl = app.actionHandler.createPlaylist(name.trim());
-            refreshPlaylistList();
-            playlistList.setSelectedValue(pl, true);
-            app.data.setSortedByObject(pl);
-            refreshSongList();
-        }
-    }
-
-    private void createNewProject() {
-        String name = JOptionPane.showInputDialog(mainWindow, "Artist/Project name:", "New Project/Artist",
-                JOptionPane.PLAIN_MESSAGE);
-        if (name != null && !name.trim().isEmpty()) {
-            ProjectArtistData pa = app.actionHandler.createProjectArtist(name.trim());
-            refreshProjectList();
-            projectList.setSelectedValue(pa, true);
-            app.data.setSortedByObject(pa);
-            refreshSongList();
-        }
-    }
-
-    private void editSelectedGroup() {
-        int idx = groupTabs.getSelectedIndex();
-        if (idx == 0) { // playlist rename
-            PlaylistData sel = playlistList.getSelectedValue();
-            if (sel != null) {
-                String name = JOptionPane.showInputDialog(mainWindow, "Playlist name:", sel.getTitle());
-                if (name != null && !name.trim().isEmpty()) {
-                    app.actionHandler.renamePlaylist(sel, name.trim());
-                    refreshPlaylistList();
-                    playlistList.setSelectedValue(sel, true);
-                }
-            }
-        } else if (idx == 1) { // project rename
-            ProjectArtistData sel = projectList.getSelectedValue();
-            if (sel != null) {
-                String name = JOptionPane.showInputDialog(mainWindow, "Artist/Project name:", sel.getName());
-                if (name != null && !name.trim().isEmpty()) {
-                    app.actionHandler.renameProjectArtist(sel, name.trim());
-                    refreshProjectList();
-                    projectList.setSelectedValue(sel, true);
-                }
-            }
-        }
-    }
-
-    private void deleteSelectedGroup() {
-        int idx = groupTabs.getSelectedIndex();
-        if (idx == 0) { // delete playlist
-            PlaylistData sel = playlistList.getSelectedValue();
-            if (sel != null) {
-                int resp = JOptionPane.showConfirmDialog(mainWindow, "Delete playlist '" + sel.getTitle() + "'?",
-                        "Delete Playlist", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (resp == JOptionPane.YES_OPTION) {
-                    app.actionHandler.deletePlaylist(sel);
-                    refreshPlaylistList();
-                    app.data.setSortedByObject(null);
-                    refreshSongList();
-                }
-            }
-        } else if (idx == 1) { // delete project
-            ProjectArtistData sel = projectList.getSelectedValue();
-            if (sel != null) {
-                int resp = JOptionPane.showConfirmDialog(mainWindow,
-                        "Delete project/artist '" + sel.getName() + "'?",
-                        "Delete Project/Artist", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (resp == JOptionPane.YES_OPTION) {
-                    app.actionHandler.deleteProjectArtist(sel);
-                    refreshProjectList();
-                    app.data.setSortedByObject(null);
-                    refreshSongList();
-                }
-            }
-        }
-    }
-
-    private void clearGroupFilter() {
-        app.data.setSortedByObject(null);
-        playlistList.clearSelection();
-        projectList.clearSelection();
-        refreshSongList();
-    }
-
-    private void showActionMenu(java.awt.Component invoker) {
-        actionPopupMenu.removeAll();
-        int idx = groupTabs.getSelectedIndex();
-
-        if (idx == 0) { // Playlists
-            JMenuItem miNew = new JMenuItem("New Playlist");
-            miNew.addActionListener(ae -> createNewPlaylist());
-            actionPopupMenu.add(miNew);
-        } else if (idx == 1) { // Projects
-            JMenuItem miNew = new JMenuItem("New Project");
-            miNew.addActionListener(ae -> createNewProject());
-            actionPopupMenu.add(miNew);
-
-            JMenuItem miSort = new JMenuItem("Sort songs to artists");
-            miSort.addActionListener(ae -> {
-                int assigned = app.actionHandler.sortSongsToArtists();
-                refreshProjectList();
-                refreshSongList();
-                JOptionPane.showMessageDialog(mainWindow, assigned + " songs were assigned to projects/artists.",
-                        "Sort Complete", JOptionPane.INFORMATION_MESSAGE);
-            });
-            actionPopupMenu.add(miSort);
-        }
-
-        JMenuItem miEdit = new JMenuItem("Edit");
-        miEdit.addActionListener(ae -> editSelectedGroup());
-        miEdit.setEnabled((idx == 0 && playlistList.getSelectedValue() != null)
-                || (idx == 1 && projectList.getSelectedValue() != null));
-        actionPopupMenu.add(miEdit);
-
-        JMenuItem miDelete = new JMenuItem("Delete");
-        miDelete.addActionListener(ae -> deleteSelectedGroup());
-        miDelete.setEnabled((idx == 0 && playlistList.getSelectedValue() != null)
-                || (idx == 1 && projectList.getSelectedValue() != null));
-        actionPopupMenu.add(miDelete);
-
-        actionPopupMenu.addSeparator();
-
-        JMenuItem miShowAll = new JMenuItem("Show All");
-        miShowAll.addActionListener(ae -> clearGroupFilter());
-        actionPopupMenu.add(miShowAll);
-
-        actionPopupMenu.show(invoker, 0, invoker.getHeight());
-    }
-
-    /**
-     * Update the action buttons shown below the group tabs depending on selected
-     * tab.
-     * The panel is intentionally extensible so more actions can be added later.
-     */
-    private void updateTabActions() {
-        if (tabActionPanel == null)
-            return;
-        tabActionPanel.removeAll();
-
-        // single compact actions menu (menu contents change depending on selected tab)
-        tabActionPanel.add(actionMenuButton);
-
-        tabActionPanel.revalidate();
-        tabActionPanel.repaint();
-    }
-
-    /**
-     * Provides external access to the action panel so callers can add buttons
-     * later.
-     */
+    // Group-related UI and actions are now handled by GroupRack.
+    // Access the action panel via the GroupRack instance so callers can still add
+    // buttons.
     public javax.swing.JPanel getGroupActionPanel() {
-        return tabActionPanel;
+        return groupRack.getGroupActionPanel();
     }
 
     @Override
@@ -679,20 +460,17 @@ public class AudioStudio implements ActionListener {
             transportRack.getTimeline().setTotalTime(0);
             transportRack.setSong(null);
         } else if (e.getSource() == openButton) {
-            File file = app.fileManager.openFileDialog(FileManager.FileFilter.AUDIOFILE);
-            if (file != null) {
-                lastData = app.actionHandler.addSong(file);
-                refreshSongList();
-                transportRack.setSong(lastData);
+            ArrayList<File> files = app.fileManager.openFileDialog(FileManager.FileFilter.AUDIOFILE);
+            if (files != null) {
+                for (File file : files) {
+                    SongData song = app.actionHandler.addSong(file);
+                    if (song != null) {
+                        refreshSongList();
+                        songList.setSelectedValue(song, true);
+                        transportRack.setSong(song);
+                    }
+                }
             }
-        } else if (e.getSource() == newPlaylistButton) {
-            createNewPlaylist();
-        } else if (e.getSource() == newProjectButton) {
-            createNewProject();
-        } else if (e.getSource() == editButton) {
-            editSelectedGroup();
-        } else if (e.getSource() == deleteButton) {
-            deleteSelectedGroup();
         } else if (e.getSource() == closeButton) {
             mainWindow.dispose();
             System.exit(0);

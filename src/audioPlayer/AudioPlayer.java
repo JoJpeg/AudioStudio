@@ -154,7 +154,7 @@ public class AudioPlayer {
      * @param durationMs Duration of the fade-in in milliseconds
      */
     private void _fadeIn(int durationMs) {
-        int steps = 10;
+        int steps = 100;
         int stepDelay = durationMs / steps;
 
         for (int i = 1; i <= steps; i++) {

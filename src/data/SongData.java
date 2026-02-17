@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SongData extends Data {
+    
     String title;
     String guessedArtist;
     String subtitle;

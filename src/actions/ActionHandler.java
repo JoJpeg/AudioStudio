@@ -37,7 +37,7 @@ public class ActionHandler {
                 SongData newSong = new SongData();
                 newSong.setFilePath(file.getAbsolutePath());
                 this.actionData = newSong; // Store the newSong in the action's data for undo/redo purposes.
-                app.data.addSong(newSong);
+                app.data.putSong(newSong);
                 String guessedTitle = "";
                 String guessedArtist = "";
 

@@ -3,11 +3,9 @@ package data;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import com.google.gson.Gson;
@@ -77,8 +75,11 @@ public class FileManager {
         return contents;
     }
 
-    public File openFileDialog(FileFilter filter) {
+    public ArrayList<File> openFileDialog(FileFilter filter) {
         FileDialog fileDialog = new FileDialog((Frame) null, "Open File", FileDialog.LOAD);
+
+        //allow multiple selection and selection of folders
+        fileDialog.setMultipleMode(true);
 
         // Set filename filter based on the filter type
         if (filter != FileFilter.NONE) {
@@ -102,11 +103,27 @@ public class FileManager {
 
         fileDialog.setVisible(true);
 
+
         String directory = fileDialog.getDirectory();
         String filename = fileDialog.getFile();
 
+        //handle case where user selected multiple files or a folder
+        if (fileDialog.getFiles() != null && fileDialog.getFiles().length > 0) {
+            File[] selectedFiles = fileDialog.getFiles();
+            if (selectedFiles != null && selectedFiles.length > 0) {
+                // If multiple files are selected, return the first one (or handle as needed)
+                ArrayList<File> filesList = new ArrayList<>();
+                for (File file : selectedFiles) {
+                    filesList.add(file);
+                }
+                return filesList;
+            }
+        }
+
         if (directory != null && filename != null) {
-            return new File(directory, filename);
+            ArrayList<File> filesList = new ArrayList<>();
+            filesList.add(new File(directory, filename));
+            return filesList;
         }
         return null;
     }

@@ -1,49 +1,151 @@
 {
-  "playlists": [
-    {
-      "title": "All Songs"
-    }
-  ],
   "projectsArtists": [
     {
       "name": "Ambient Mean",
-      "created": "Feb 17, 2026, 6:36:12 PM"
+      "created": "Feb 17, 2026, 10:58:05 PM",
+      "songsPaths": [
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3"
+      ]
+    },
+    {
+      "name": "Xorm",
+      "created": "Feb 17, 2026, 10:58:05 PM",
+      "songsPaths": [
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav"
+      ]
     },
     {
       "name": "Xormbientmean",
-      "created": "Feb 17, 2026, 6:36:37 PM"
+      "created": "Feb 17, 2026, 10:58:05 PM",
+      "songsPaths": [
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav"
+      ]
     }
   ],
-  "songs": [
-    {
-      "title": "Dimond Orbit",
-      "guessedArtist": "Xormbientmean",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav",
-      "version": 0
-    },
-    {
-      "title": "History of Myzhanzh",
-      "guessedArtist": "Xormbientmean",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - History of Myzhanzh.wav",
-      "version": 0
-    },
-    {
+  "songs": {
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3": {
       "title": "Spectral Orbit (mix1)",
       "guessedArtist": "AM",
       "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3",
-      "version": 0
+      "version": 0,
+      "owners": [
+        {
+          "name": "Ambient Mean",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3"
+          ]
+        }
+      ]
     },
-    {
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3": {
+      "title": "Gray Rain",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav": {
+      "title": "Second Harvest",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3": {
       "title": "",
       "guessedArtist": "",
       "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3",
       "version": 0
     },
-    {
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3": {
+      "title": "Second Harvest",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav": {
+      "title": "",
+      "guessedArtist": "",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav",
+      "version": 0
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav": {
+      "title": "Dimond Orbit",
+      "guessedArtist": "Xormbientmean",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xormbientmean",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav": {
       "title": "Gray Rain",
       "guessedArtist": "Xorm",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
-      "version": 0
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.wav"
+          ]
+        }
+      ]
     }
-  ]
+  },
+  "sortedByObject": {
+    "name": "Ambient Mean",
+    "created": "Feb 17, 2026, 10:58:05 PM",
+    "songsPaths": [
+      "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3"
+    ]
+  }
 }

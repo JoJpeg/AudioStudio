@@ -17,6 +17,15 @@ public class SongLCDPanel extends JPanel {
     private boolean expanded = false;
     private JButton expandButton;
 
+    // Clickable hit areas for expanded text
+    private java.util.List<Rectangle> ownerClickAreas = new java.util.ArrayList<>();
+    private java.util.List<data.ProjectArtistData> ownerClickTargets = new java.util.ArrayList<>();
+    private Rectangle fileClickArea = null;
+
+    // Callbacks (optional) - AudioStudio will register handlers
+    private java.util.function.Consumer<String> onFileClick;
+    private java.util.function.Consumer<data.ProjectArtistData> onOwnerClick;
+
     public SongLCDPanel() {
         setOpaque(false);
         // more compact height for the LCD song line
@@ -40,6 +49,63 @@ public class SongLCDPanel extends JPanel {
             repaint();
         });
         add(expandButton, BorderLayout.EAST);
+
+        // mouse handling for clickable expanded items
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!expanded || song == null)
+                    return;
+                Point pt = e.getPoint();
+                if (fileClickArea != null && fileClickArea.contains(pt)) {
+                    if (onFileClick != null) {
+                        onFileClick.accept(song.getFilePath());
+                    } else {
+                        // fallback: try to open folder using Desktop
+                        try {
+                            java.io.File f = new java.io.File(song.getFilePath());
+                            java.io.File dir = f.isDirectory() ? f : f.getParentFile();
+                            if (dir != null && dir.exists() && java.awt.Desktop.isDesktopSupported()) {
+                                java.awt.Desktop.getDesktop().open(dir);
+                            }
+                        } catch (Exception ex) {
+                            // ignore fallback errors
+                        }
+                    }
+                    return;
+                }
+                for (int i = 0; i < ownerClickAreas.size(); i++) {
+                    if (ownerClickAreas.get(i).contains(pt)) {
+                        data.ProjectArtistData pa = ownerClickTargets.get(i);
+                        if (onOwnerClick != null) {
+                            onOwnerClick.accept(pa);
+                        }
+                        return;
+                    }
+                }
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                if (!expanded || song == null) {
+                    setCursor(Cursor.getDefaultCursor());
+                    return;
+                }
+                Point pt = e.getPoint();
+                boolean over = (fileClickArea != null && fileClickArea.contains(pt));
+                if (!over) {
+                    for (Rectangle r : ownerClickAreas) {
+                        if (r.contains(pt)) {
+                            over = true;
+                            break;
+                        }
+                    }
+                }
+                setCursor(over ? Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) : Cursor.getDefaultCursor());
+            }
+        });
     }
 
     public void setSong(SongData song) {
@@ -54,6 +120,22 @@ public class SongLCDPanel extends JPanel {
 
     public boolean isExpanded() {
         return expanded;
+    }
+
+    /**
+     * Register a callback invoked when the filepath area is clicked (receives
+     * the song file path). If not set, a platform Desktop.open fallback is used.
+     */
+    public void setOnFileClick(java.util.function.Consumer<String> cb) {
+        this.onFileClick = cb;
+    }
+
+    /**
+     * Register a callback invoked when an owner name is clicked (receives the
+     * corresponding ProjectArtistData).
+     */
+    public void setOnOwnerClick(java.util.function.Consumer<data.ProjectArtistData> cb) {
+        this.onOwnerClick = cb;
     }
 
     @Override
@@ -80,39 +162,78 @@ public class SongLCDPanel extends JPanel {
         }
 
         // Draw main info
+        int textX = 12;
+        int textY = 0;
         if (song != null) {
             g2d.setColor(LCD_TEXT);
             g2d.setFont(LCD_FONT);
             String mainInfo = song.getTitle() + " - " + song.getGuessedArtist();
             FontMetrics fm = g2d.getFontMetrics();
-            int textX = 12;
-            int textY = 2 + (height + fm.getAscent() - fm.getDescent()) / 2;
+            if (expanded) {
+                textY = (fm.getAscent() - fm.getDescent()) + 15;
+            } else {
+                // If expanded, move the main info up to make room for details
+                textY += (height + (fm.getAscent() - fm.getDescent())) / 2;
+            }
             g2d.drawString(mainInfo, textX, textY);
         }
 
-        // Draw expanded info
+        // Draw expanded info (and compute clickable hit areas)
         if (expanded && song != null) {
-            g2d.setFont(new Font("Monospaced", Font.PLAIN, 12));
             g2d.setColor(LCD_TEXT_SELECTED);
-            int y = height + 18;
-            g2d.drawString("Subtitle: " + song.getSubtitle(), 12, y);
-            y += 18;
-            g2d.drawString("Version: " + song.getVersion(), 12, y);
-            y += 18;
+            int yGap = 15;
+            int mainBaseline = textY + yGap;
+            int y = mainBaseline + 2;
 
-            //draw file path
-            g2d.drawString("File: " + song.getFilePath(), 12, y);
-            y += 18;
-            if (song.getOwners() != null) {
+            // reset hit areas
+            ownerClickAreas.clear();
+            ownerClickTargets.clear();
+            fileClickArea = null;
+
+            FontMetrics fm = g2d.getFontMetrics();
+
+            if (song.getSubtitle() != null) {
+                String s = "Subtitle: " + song.getSubtitle();
+                g2d.drawString(s, 12, y);
+                y += yGap;
+            }
+
+            String ver = "Version: " + song.getVersion();
+            g2d.drawString(ver, 12, y);
+            y += yGap;
+
+            // draw file path (make it clickable)
+            String fileLabel = "File: " + song.getFilePath();
+            int fx = 12;
+            g2d.drawString(fileLabel, fx, y);
+            int fw = fm.stringWidth(fileLabel);
+            fileClickArea = new Rectangle(fx, y - fm.getAscent(), fw, fm.getAscent() + fm.getDescent());
+            // underline to indicate clickable
+            g2d.setColor(LCD_TEXT);
+            g2d.drawLine(fx, y + 2, fx + fw, y + 2);
+            g2d.setColor(LCD_TEXT_SELECTED);
+            y += yGap;
+
+            if (song.getOwners() != null && !song.getOwners().isEmpty()) {
                 g2d.drawString("Owners:", 12, y);
-                y += 16;
+                y += yGap;
                 for (ProjectArtistData owner : song.getOwners()) {
-                    g2d.drawString("- " + owner.getName(), 24, y);
-                    y += 16;
+                    String ownerText = "- " + owner.getName();
+                    int ox = 24;
+                    g2d.drawString(ownerText, ox, y);
+                    int ow = fm.stringWidth(ownerText);
+                    ownerClickAreas.add(new Rectangle(ox, y - fm.getAscent(), ow, fm.getAscent() + fm.getDescent()));
+                    ownerClickTargets.add(owner);
+                    // underline owner name (skip the leading "- ")
+                    int dashW = fm.stringWidth("- ");
+                    int nameX = ox + dashW;
+                    int nameW = fm.stringWidth(owner.getName());
+                    g2d.setColor(LCD_TEXT);
+                    g2d.drawLine(nameX, y + 2, nameX + nameW, y + 2);
+                    g2d.setColor(LCD_TEXT_SELECTED);
+                    y += yGap;
                 }
             }
-            // Song versions (if available)
-            // ...could be added here if SongData exposes them
         }
         g2d.dispose();
     }

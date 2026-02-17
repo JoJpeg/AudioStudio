@@ -17,23 +17,23 @@ public class ProjectArtistData extends Data {
     Note note;
     String description;
     String imagePath;
-    ArrayList<SongData> songs;
+    ArrayList<String> songsPaths;
     ProjectArtistData owner;
     ArrayList<ProjectArtistData> children;
-
-    public ArrayList<SongData> getSongs() {
-        return songs;
+    
+    public ArrayList<String> getSongPaths() {
+        return songsPaths;
     }
 
-    public void setSongs(ArrayList<SongData> songs) {
-        this.songs = songs;
+    public void setSongPaths(ArrayList<String> songsPaths) {
+        this.songsPaths = songsPaths;
     }
 
     public void addSong(SongData newSong) {
-        if (songs == null) {
-            songs = new ArrayList<>();
+        if (songsPaths == null) {
+            songsPaths = new ArrayList<>();
         }
-        songs.add(newSong);
+        songsPaths.add(newSong.getFilePath());
     }
 
     public ProjectType getProjectType() {
@@ -114,8 +114,8 @@ public class ProjectArtistData extends Data {
     }
 
     public void removeSong(SongData song) {
-        if (songs != null) {
-            songs.remove(song);
+        if (songsPaths != null) {
+            songsPaths.remove(song.getFilePath());
         }
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class PlaylistData extends Data {
     String title;
-    ArrayList<SongData> songs;
+    ArrayList<SongData> songs; //TODO: save only a reference to the song, currentyl serialiting creates a vicious loop
     Note note;
 
     public ArrayList<SongData> getSongs() {

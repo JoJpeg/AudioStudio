@@ -11,10 +11,11 @@ import static gui.retro.RetroTheme.*;
  */
 public class RetroTimeline extends JPanel {
 
-    private static final int DISPLAY_WIDTH = 120;
-    private static final int DISPLAY_HEIGHT = 32;
-    private static final int BAR_HEIGHT = 20;
-    private static final int BAR_SEGMENT_WIDTH = 6;
+    // reduced sizes for compact transport rack
+    private static final int DISPLAY_WIDTH = 96;
+    private static final int DISPLAY_HEIGHT = 20;
+    private static final int BAR_HEIGHT = 12;
+    private static final int BAR_SEGMENT_WIDTH = 5;
     private static final int BAR_SEGMENT_GAP = 2;
 
     private long currentTimeMs = 0;
@@ -34,7 +35,8 @@ public class RetroTimeline extends JPanel {
 
     public RetroTimeline() {
         setOpaque(false);
-        setPreferredSize(new Dimension(400, 50));
+        // smaller preferred size so transport rack occupies less vertical space
+        setPreferredSize(new Dimension(320, 36));
         setupMouseListeners();
     }
 
@@ -67,6 +69,10 @@ public class RetroTimeline extends JPanel {
                 if (isInBarArea(e.getPoint())) {
                     isDragging = true;
                     updateTimeFromMouse(e.getX());
+                    // Notify listener immediately for instant jump
+                    if (listener != null) {
+                        listener.onSeek(currentTimeMs);
+                    }
                 }
             }
 
@@ -74,7 +80,9 @@ public class RetroTimeline extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 if (isDragging) {
                     isDragging = false;
-                    if (listener != null) {
+                    // Optionally notify again on release for drag-to-seek
+                    if (isInBarArea(e.getPoint()) && listener != null) {
+                        updateTimeFromMouse(e.getX());
                         listener.onSeek(currentTimeMs);
                     }
                 }

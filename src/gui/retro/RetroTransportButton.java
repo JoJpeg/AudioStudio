@@ -18,9 +18,10 @@ public class RetroTransportButton extends JButton {
 
     public RetroTransportButton(TransportType type) {
         this.transportType = type;
-        setPreferredSize(new Dimension(48, 40));
-        setMinimumSize(new Dimension(48, 40));
-        setMaximumSize(new Dimension(48, 40));
+        // smaller transport buttons for compact rack
+        setPreferredSize(new Dimension(40, 28));
+        setMinimumSize(new Dimension(36, 24));
+        setMaximumSize(new Dimension(64, 34));
         setFocusPainted(false);
         setBorderPainted(false);
         setContentAreaFilled(false);

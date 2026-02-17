@@ -1,4 +1,19 @@
 {
+  "playlists": [
+    {
+      "title": "All Songs"
+    }
+  ],
+  "projectsArtists": [
+    {
+      "name": "Ambient Mean",
+      "created": "Feb 17, 2026, 6:36:12 PM"
+    },
+    {
+      "name": "Xormbientmean",
+      "created": "Feb 17, 2026, 6:36:37 PM"
+    }
+  ],
   "songs": [
     {
       "title": "Dimond Orbit",
@@ -16,6 +31,18 @@
       "title": "Spectral Orbit (mix1)",
       "guessedArtist": "AM",
       "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3",
+      "version": 0
+    },
+    {
+      "title": "",
+      "guessedArtist": "",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3",
+      "version": 0
+    },
+    {
+      "title": "Gray Rain",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
       "version": 0
     }
   ]

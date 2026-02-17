@@ -59,7 +59,7 @@ public class RetroTheme {
     // ========== Fonts ==========
     public static final Font HEADER_FONT = new Font("SansSerif", Font.BOLD, 13);
     public static final Font HEADER_BUTTON_FONT = new Font("SansSerif", Font.BOLD, 14);
-    public static final Font LCD_FONT = new Font("Monospaced", Font.BOLD, 14);
+    public static final Font LCD_FONT = new Font("Monospaced", Font.BOLD, 10);
 
     // ========== Utility Methods ==========
 

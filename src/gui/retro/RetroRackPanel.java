@@ -6,11 +6,11 @@ import static gui.retro.RetroTheme.*;
 
 public class RetroRackPanel extends JPanel {
 
-    private static final int BORDER_THICKNESS = 4;
+    // Reduced thickness/margins to make panels more compact
+    private static final int BORDER_THICKNESS = 2;
     private static final int SCREW_SIZE = 14;
-    private static final int SCREW_MARGIN = 10;
-    private static final int CONTENT_PADDING = SCREW_MARGIN + SCREW_SIZE + 8; // Extra padding to avoid overlapping
-                                                                              // screws
+    private static final int SCREW_MARGIN = 6;
+    private static final int CONTENT_PADDING = SCREW_MARGIN + SCREW_SIZE + 2; // smaller padding to save space
 
     public RetroRackPanel() {
         setOpaque(false);

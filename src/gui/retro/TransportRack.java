@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import data.SongData;
 import gui.retro.RetroTransportButton.TransportType;
 
 public class TransportRack extends RetroRackPanel {
@@ -14,12 +15,18 @@ public class TransportRack extends RetroRackPanel {
     private RetroTransportButton pauseButton;
     private RetroTransportButton stopButton;
     private RetroTimeline timeline;
+    private SongLCDPanel songPanel;
+    private LCDParentPanel lcdPanel;
 
     public TransportRack(ActionListener listener) {
-        super(new BorderLayout(0, 8));
+        // reduce vertical gaps to make rack compact
+        super(new BorderLayout(0, 2));
 
-        // Create buttons panel
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        // Song LCD panel (now smaller by default)
+        songPanel = new SongLCDPanel();
+
+        // Create buttons panel with tighter gaps
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 2, 2));
         buttonsPanel.setOpaque(false);
 
         playButton = new RetroTransportButton(TransportType.PLAY);
@@ -37,9 +44,11 @@ public class TransportRack extends RetroRackPanel {
 
         // Create timeline
         timeline = new RetroTimeline();
+        lcdPanel = new LCDParentPanel(songPanel, timeline);
 
         add(buttonsPanel, BorderLayout.NORTH);
-        add(timeline, BorderLayout.CENTER);
+        add(lcdPanel, BorderLayout.SOUTH);
+        // add(timeline, BorderLayout.SOUTH);
     }
 
     public RetroTransportButton getPlayButton() {
@@ -56,5 +65,13 @@ public class TransportRack extends RetroRackPanel {
 
     public RetroTimeline getTimeline() {
         return timeline;
+    }
+
+    public SongLCDPanel getSongPanel() {
+        return songPanel;
+    }
+
+    public void setSong(SongData song) {
+        songPanel.setSong(song);
     }
 }

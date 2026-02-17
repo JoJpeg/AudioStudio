@@ -6,7 +6,8 @@ import java.awt.event.*;
 import static gui.retro.RetroTheme.*;
 
 /**
- * A retro-styled timeline component with LCD display and LED-style progress bar.
+ * A retro-styled timeline component with LCD display and LED-style progress
+ * bar.
  */
 public class RetroTimeline extends JPanel {
 

@@ -150,12 +150,13 @@ public class AudioPlayer {
 
     /**
      * Performs a quick fade-in to prevent audio clicks at playback start.
+     * 
      * @param durationMs Duration of the fade-in in milliseconds
      */
     private void _fadeIn(int durationMs) {
         int steps = 10;
         int stepDelay = durationMs / steps;
-        
+
         for (int i = 1; i <= steps; i++) {
             float fadeVolume = (float) i / steps * currentVolume;
             _setVolumeImmediate(fadeVolume);

@@ -319,6 +319,23 @@ public class AudioStudio implements ActionListener {
         mainWindow.setBounds(newX, newY, newWidth, newHeight);
     }
 
+    private void setupTimelineUpdates() {
+        // Set up seek listener
+        transportRack.getTimeline().setTimelineListener(timeMs -> {
+            app.audioPlayer.seek(timeMs);
+        });
+
+        // Create timer to update timeline every 100ms
+        timelineUpdateTimer = new Timer(100, e -> {
+            RetroTimeline timeline = transportRack.getTimeline();
+            if (app.audioPlayer.isPlaying() || app.audioPlayer.isPaused()) {
+                timeline.setTotalTime(app.audioPlayer.getDurationMs());
+                timeline.setCurrentTime(app.audioPlayer.getPositionMs());
+            }
+        });
+        timelineUpdateTimer.start();
+    }
+
     public void refreshSongList() {
         songListModel.clear();
         if (app.data.getSongs() != null) {
@@ -340,6 +357,8 @@ public class AudioStudio implements ActionListener {
             app.audioPlayer.pause();
         } else if (e.getSource() == transportRack.getStopButton()) {
             app.audioPlayer.stop();
+            transportRack.getTimeline().setCurrentTime(0);
+            transportRack.getTimeline().setTotalTime(0);
         } else if (e.getSource() == openButton) {
             File file = app.fileManager.openFileDialog(FileManager.FileFilter.AUDIOFILE);
             if (file != null) {

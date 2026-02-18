@@ -14,6 +14,8 @@ public class TransportRack extends RetroRackPanel {
     private RetroTransportButton playButton;
     private RetroTransportButton pauseButton;
     private RetroTransportButton stopButton;
+    
+
     private RetroTimeline timeline;
     private SongLCDPanel songPanel;
     private LCDParentPanel lcdPanel;
@@ -37,6 +39,8 @@ public class TransportRack extends RetroRackPanel {
 
         stopButton = new RetroTransportButton(TransportType.STOP);
         stopButton.addActionListener(listener);
+
+
 
         buttonsPanel.add(playButton);
         buttonsPanel.add(pauseButton);

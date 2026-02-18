@@ -11,6 +11,7 @@ public class RetroTheme {
     // ========== Window & Panel Colors ==========
     public static final Color WINDOW_BACKGROUND = new Color(40, 40, 45);
     public static final Color WINDOW_BORDER = new Color(60, 60, 65);
+    public static final Color MAIN_COLOR = new Color(30, 30, 30);
 
     // ========== Header Colors ==========
     public static final Color HEADER_BACKGROUND = new Color(50, 50, 55);
@@ -21,20 +22,20 @@ public class RetroTheme {
     public static final Color HEADER_CLOSE_HOVER_BG = new Color(200, 70, 70);
 
     // ========== Retro Panel Colors (Embossed Gray) ==========
-    public static final Color PANEL_FACE = new Color(192, 192, 192);
-    public static final Color PANEL_HIGHLIGHT = new Color(255, 255, 255);
-    public static final Color PANEL_SHADOW = new Color(128, 128, 128);
-    public static final Color PANEL_DARK_SHADOW = new Color(64, 64, 64);
+    public static final Color PANEL_FACE = MAIN_COLOR;
+    public static final Color PANEL_HIGHLIGHT = MAIN_COLOR.brighter().brighter();
+    public static final Color PANEL_SHADOW = MAIN_COLOR.darker();
+    public static final Color PANEL_DARK_SHADOW = MAIN_COLOR.darker().darker();
     public static final Color PANEL_INNER_HIGHLIGHT = new Color(230, 230, 230);
 
     // ========== Screw Colors ==========
-    public static final Color SCREW_OUTER = new Color(100, 100, 100);
-    public static final Color SCREW_INNER = new Color(160, 160, 160);
-    public static final Color SCREW_SLOT = new Color(50, 50, 50);
-    public static final Color SCREW_HIGHLIGHT = new Color(200, 200, 200);
+    public static final Color SCREW_OUTER = new Color(50, 50, 50);
+    public static final Color SCREW_INNER = new Color(35, 35, 35);
+    public static final Color SCREW_SLOT = new Color(0, 0, 0);
+    public static final Color SCREW_HIGHLIGHT = new Color(100, 100, 100);
 
     // ========== Button Colors ==========
-    public static final Color BUTTON_FACE = new Color(192, 192, 192);
+    public static final Color BUTTON_FACE = MAIN_COLOR;
     public static final Color BUTTON_HIGHLIGHT = new Color(255, 255, 255);
     public static final Color BUTTON_SHADOW = new Color(128, 128, 128);
     public static final Color BUTTON_DARK_SHADOW = new Color(64, 64, 64);

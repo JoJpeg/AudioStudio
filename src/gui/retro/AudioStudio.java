@@ -40,7 +40,7 @@ public class AudioStudio implements ActionListener {
     JWindow mainWindow;
 
     TransportRack transportRack;
-    SongsRack songsRack;
+    BrowserRack songsRack;
     JButton closeButton;
 
     SongData lastData = null;
@@ -95,7 +95,7 @@ public class AudioStudio implements ActionListener {
         setupTimelineUpdates();
 
         // Create songs rack (encapsulated)
-        songsRack = new SongsRack(app,
+        songsRack = new BrowserRack(app,
                 selected -> {
                     if (selected != null) {
                         lastData = selected;

@@ -3,6 +3,8 @@
 ###Features
 Seperate Browser/File Manager from Player/Inspector UI?
 
+Change the GUI System so that your Components get a "Renderer" 
+
 Browser: manage files, add songs, name projects, see all files
 Player: see details, current queue, notes, timestamps
 

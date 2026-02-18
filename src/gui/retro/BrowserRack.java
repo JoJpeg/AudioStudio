@@ -29,7 +29,7 @@ import data.SongData;
  * Mirrors the old inline implementation from AudioStudio and provides
  * a simple selection callback so the parent can react to changes.
  */
-public class SongsRack implements ActionListener {
+public class BrowserRack implements ActionListener {
     private final ApplicationResources app;
     private final RetroRackPanel rackPanel;
 
@@ -40,7 +40,7 @@ public class SongsRack implements ActionListener {
     private final Consumer<SongData> onSongSelected; // nullable
     private final Consumer<SongData> onSongDoubleClicked; // nullable
 
-    public SongsRack(ApplicationResources app, Consumer<SongData> onSongSelected,
+    public BrowserRack(ApplicationResources app, Consumer<SongData> onSongSelected,
             Consumer<SongData> onSongDoubleClicked) {
         this.app = app;
         this.onSongSelected = onSongSelected;

@@ -134,6 +134,9 @@ public class GlobalData extends Data {
     }
 
     private ArrayList<SongData> getSongsByPaths(ArrayList<String> paths) {
+        if (paths == null) {
+            return new ArrayList<>();
+        }
         ArrayList<SongData> result = new ArrayList<>();
         if (songs != null) {
             for (String path : paths) {

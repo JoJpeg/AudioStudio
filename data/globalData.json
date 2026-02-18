@@ -1,4 +1,9 @@
 {
+  "playlists": [
+    {
+      "title": "All Songs"
+    }
+  ],
   "projectsArtists": [
     {
       "name": "Ambient Mean",
@@ -8,7 +13,7 @@
       ]
     },
     {
-      "name": "Xorm",
+      "name": "Xorm (Hermit)",
       "created": "Feb 17, 2026, 10:58:05 PM",
       "songsPaths": [
         "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Gray Rain.mp3",
@@ -23,9 +28,148 @@
       "songsPaths": [
         "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav"
       ]
+    },
+    {
+      "name": "Xorm",
+      "created": "Feb 18, 2026, 12:51:59 AM",
+      "songsPaths": [
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+        "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+      ]
     }
   ],
   "songs": {
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3": {
+      "title": "",
+      "guessedArtist": "",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3",
+      "version": 0
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav": {
+      "title": "Fief II",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav": {
+      "title": "Super Saturn",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav": {
+      "title": "",
+      "guessedArtist": "",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav",
+      "version": 0
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav": {
+      "title": "Dimond Orbit",
+      "guessedArtist": "Xormbientmean",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xormbientmean",
+          "created": "Feb 17, 2026, 10:58:05 PM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav": {
+      "title": "Intergalactic Orchestra (12-2)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav": {
+      "title": "Red Sand Horizons (12v2)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
     "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3": {
       "title": "Spectral Orbit (mix1)",
       "guessedArtist": "AM",
@@ -37,6 +181,30 @@
           "created": "Feb 17, 2026, 10:58:05 PM",
           "songsPaths": [
             "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3": {
+      "title": "Red Sand Horizons (12v2)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
           ]
         }
       ]
@@ -77,11 +245,53 @@
         }
       ]
     },
-    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3": {
-      "title": "",
-      "guessedArtist": "",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.mp3",
-      "version": 0
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav": {
+      "title": "Red Sand Horizons (12 test)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav": {
+      "title": "Intergalactic Orchestra (12)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
     },
     "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm - Second Harvest .mp3": {
       "title": "Second Harvest",
@@ -101,23 +311,74 @@
         }
       ]
     },
-    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav": {
-      "title": "",
-      "guessedArtist": "",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xorm (Hermit)- Gray Rain.wav",
-      "version": 0
-    },
-    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav": {
-      "title": "Dimond Orbit",
-      "guessedArtist": "Xormbientmean",
-      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav",
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3": {
+      "title": "Red Sand Horizons (12 test)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
       "version": 0,
       "owners": [
         {
-          "name": "Xormbientmean",
-          "created": "Feb 17, 2026, 10:58:05 PM",
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
           "songsPaths": [
-            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/Xormbientmean - Dimond Orbit.wav"
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3": {
+      "title": "Red Sand Horizons (12v3)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
+          ]
+        }
+      ]
+    },
+    "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav": {
+      "title": "Red Sand Horizons (12v3)",
+      "guessedArtist": "Xorm",
+      "filePath": "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav",
+      "version": 0,
+      "owners": [
+        {
+          "name": "Xorm",
+          "created": "Feb 18, 2026, 12:51:59 AM",
+          "songsPaths": [
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Fief II.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Super Saturn.wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12-2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v2).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/Xorm - Intergalactic Orchestra (12).wav",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12 test).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).mp3",
+            "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/Xorm/Xorm - Hypno Flute Jester Project/bounce/full songs/  Xorm - Red Sand Horizons (12v3).wav"
           ]
         }
       ]
@@ -140,12 +401,5 @@
         }
       ]
     }
-  },
-  "sortedByObject": {
-    "name": "Ambient Mean",
-    "created": "Feb 17, 2026, 10:58:05 PM",
-    "songsPaths": [
-      "/Users/jonaseschner/Dropbox (Privat)/Ambient Mean/bounces/AM - Spectral Orbit (mix1).mp3"
-    ]
   }
 }

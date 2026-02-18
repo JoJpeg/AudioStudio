@@ -57,7 +57,8 @@ public abstract class BaseLCDListCellRenderer extends DefaultListCellRenderer {
         if (rendererComponent instanceof JComponent) {
             JComponent jc = (JComponent) rendererComponent;
             jc.setOpaque(true);
-            Color bgColor = isSelected ? LCD_BACKGROUND_SELECTED : (index % 2 == 0 ? LCD_BACKGROUND : LCD_BACKGROUND_ALT);
+            Color bgColor = isSelected ? LCD_BACKGROUND_SELECTED
+                    : (index % 2 == 0 ? LCD_BACKGROUND : LCD_BACKGROUND_ALT);
             Color fgColor = isSelected ? LCD_TEXT_SELECTED : LCD_TEXT;
             jc.setBackground(bgColor);
             jc.setForeground(fgColor);

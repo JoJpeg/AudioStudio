@@ -1,6 +1,9 @@
 package gui.retro;
 
 import javax.swing.*;
+
+import audioPlayer.AudioPlayer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -93,7 +96,19 @@ public class RetroTransportButton extends JButton {
             g2d.drawLine(width - 1, 0, width - 1, height - 1);
         } else {
             // Normal state - classic embossed look
-            g2d.setColor(isHovered ? getButtonFaceHover() : BUTTON_FACE);
+            Color backgroundColor = isHovered ? getButtonFaceHover() : BUTTON_FACE;
+            if (transportType == TransportType.PAUSE) {
+                // if playback is paused, keep the "hover" look to the pause button to indicate
+                // paused state
+
+                // check for playback state:
+                AudioPlayer.TransportState state = AudioPlayer.transportState;
+                if (state == AudioPlayer.TransportState.PAUSED) {
+                    backgroundColor = getButtonFaceHover();
+                }
+
+            }
+            g2d.setColor(backgroundColor);
             g2d.fillRect(0, 0, width, height);
 
             // Outer highlight (top-left)

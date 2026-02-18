@@ -29,6 +29,12 @@ public class AudioPlayer {
     private String currentFilePath;
     private float currentVolume = 1.0f;
 
+    public static TransportState transportState = TransportState.STOPPED;
+
+    public enum TransportState {
+        PLAYING, PAUSED, STOPPED
+    }
+
     public void play(String filePath) {
         executor.submit(() -> {
             System.out.println("Received request to play: " + filePath);
@@ -43,6 +49,7 @@ public class AudioPlayer {
 
     public void stop() {
         executor.submit(this::_stopAudio);
+
     }
 
     public void pause() {
@@ -104,6 +111,7 @@ public class AudioPlayer {
             clip.close();
             clip = null;
         }
+        transportState = TransportState.STOPPED;
         _closeStreams();
         currentFilePath = null;
     }
@@ -111,12 +119,15 @@ public class AudioPlayer {
     private void _pauseAudio() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
+            transportState = TransportState.PAUSED;
         }
     }
 
     private void _resumeAudio() {
         if (clip != null && !clip.isRunning()) {
             clip.start();
+            transportState = TransportState.PLAYING;
+            System.out.println("Resuming audio: " + currentFilePath);
         }
     }
 
@@ -191,6 +202,14 @@ public class AudioPlayer {
     }
 
     public void _playAudio(String filePath) {
+        if (filePath == null || filePath.isEmpty()) {
+            System.err.println("Invalid file path: " + filePath);
+            return;
+        }
+        if (clip != null && clip.isRunning()) {
+            System.out.println("Stopping currently playing audio before starting new one.");
+            _stopAudio();
+        }
         try {
             File audioFile = new File(filePath);
             System.out.println("Attempting to play: " + audioFile.getAbsolutePath());
@@ -231,6 +250,7 @@ public class AudioPlayer {
             // Start with silence and fade in to prevent click
             _setVolumeImmediate(0.0f);
             clip.start();
+            transportState = TransportState.PLAYING;
             _fadeIn(20); // 20ms fade-in to eliminate click
             System.out.println("Playing audio: " + filePath);
 

@@ -8,8 +8,6 @@ import static gui.retro.RetroTheme.HEADER_BUTTON_TEXT;
 import static gui.retro.RetroTheme.HEADER_CLOSE_HOVER_BG;
 import static gui.retro.RetroTheme.HEADER_FONT;
 import static gui.retro.RetroTheme.HEADER_TEXT;
-import static gui.retro.RetroTheme.LCD_BACKGROUND;
-import static gui.retro.RetroTheme.LCD_BORDER;
 import static gui.retro.RetroTheme.WINDOW_BACKGROUND;
 import static gui.retro.RetroTheme.WINDOW_BORDER;
 
@@ -24,26 +22,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JWindow;
-import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
 
 import application.ApplicationResources;
-import data.FileManager;
-import data.ProjectArtistData;
 import data.SongData;
 
 public class AudioStudio implements ActionListener {
@@ -52,10 +40,8 @@ public class AudioStudio implements ActionListener {
     JWindow mainWindow;
 
     TransportRack transportRack;
-    JButton openButton;
+    SongsRack songsRack;
     JButton closeButton;
-    JList<SongData> songList;
-    DefaultListModel<SongData> songListModel;
 
     SongData lastData = null;
 
@@ -108,98 +94,27 @@ public class AudioStudio implements ActionListener {
         // Set up timeline updates
         setupTimelineUpdates();
 
-        // Create files rack with song list
-        // Use tighter gaps inside racks to maximise usable area
-        RetroRackPanel filesRack = new RetroRackPanel(new BorderLayout(2, 2));
-
-        // Create song list panel
-        songListModel = new DefaultListModel<>();
-        refreshSongList();
-        songList = new JList<>(songListModel);
-        songList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        songList.setCellRenderer(new LCDListCellRenderer(
-                o -> {
-                    if (!(o instanceof SongData))
-                        return "";
-                    SongData song = (SongData) o;
-
-                    ArrayList<ProjectArtistData> projectArtists = song.getOwners();
-                    StringBuilder b = new StringBuilder();
-
-                    String displayText = "";
-
-                    if (projectArtists != null && !projectArtists.isEmpty()) {
-                        for (ProjectArtistData pa : projectArtists) {
-                            if (b.length() > 0)
-                                b.append(", ");
-                            b.append(pa.getName());
-                        }
-                        displayText += b.toString() + " - ";
-                    } else {
-                        if (song.getGuessedArtist() != null && !song.getGuessedArtist().isEmpty()) {
-                            displayText += song.getGuessedArtist() + " - ";
-                        } else {
-                            displayText += "Unknown Artist - ";
-                        }
-                    }
-
-                    displayText += song.getTitle() != null ? song.getTitle() : "Unknown";
-
-                    if (displayText.equals("Unknown Artist - Unknown")) {
-                        String filePath = song.getFilePath();
-                        displayText = filePath != null ? new java.io.File(filePath).getName() : "Unknown";
-                    }
-
-                    return displayText;
-                },
-                o -> {
-                    if (!(o instanceof SongData))
-                        return "";
-                    long duration = ((SongData) o).getDurationSeconds();
-                    if (duration > 0) {
-                        long minutes = duration / 60;
-                        long seconds = duration % 60;
-                        return String.format("%02d:%02d", minutes, seconds);
-                    }
-                    return "";
-                }));
-        songList.setBackground(LCD_BACKGROUND);
-        songList.setFixedCellHeight(32); // Ensure consistent row height
-        songList.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                SongData selected = songList.getSelectedValue();
-                if (selected != null) {
-                    lastData = selected;
-                    transportRack.setSong(selected);
-                }
-            }
-        });
-
-        // Double-click to play song
-        songList.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    SongData selected = songList.getSelectedValue();
+        // Create songs rack (encapsulated)
+        songsRack = new SongsRack(app,
+                selected -> {
                     if (selected != null) {
-                        app.audioPlayer.play(selected.getFilePath());
+                        lastData = selected;
+                        // transportRack.setSong(selected);
+                    }
+                    if (!appData.audioPlayer.isPlaying() && !appData.audioPlayer.isPaused()) {
                         transportRack.setSong(selected);
                     }
-                }
-            }
-        });
+                },
 
-        JScrollPane scrollPane = new JScrollPane(songList);
-        scrollPane.getViewport().setBackground(LCD_BACKGROUND);
-        scrollPane.setBorder(BorderFactory.createLineBorder(LCD_BORDER, 1));
-        filesRack.add(scrollPane, BorderLayout.CENTER);
-
-        openButton = new JButton("Open");
-        openButton.addActionListener(this);
-        filesRack.add(openButton, BorderLayout.SOUTH);
+                doubleClicked -> {
+                    if (doubleClicked != null) {
+                        app.audioPlayer._playAudio(doubleClicked.getFilePath());
+                        transportRack.setSong(doubleClicked);
+                    }
+                });
 
         // Create groups rack (left)
-        groupRack = new GroupRack(app, mainWindow, this::refreshSongList);
+        groupRack = new GroupRack(app, mainWindow, songsRack::refreshSongList);
 
         // wire up SongLCDPanel clicks: open folder and jump to project
         gui.retro.SongLCDPanel songPanel = transportRack.getSongPanel();
@@ -225,7 +140,7 @@ public class AudioStudio implements ActionListener {
         });
 
         contentPanel.add(groupRack.getPanel(), BorderLayout.WEST);
-        contentPanel.add(filesRack, BorderLayout.CENTER);
+        contentPanel.add(songsRack.getPanel(), BorderLayout.CENTER);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         // Add resize functionality
@@ -429,13 +344,8 @@ public class AudioStudio implements ActionListener {
     }
 
     public void refreshSongList() {
-        songListModel.clear();
-        java.util.List<SongData> songs = (app.data != null) ? app.data.getSongsSorted() : null;
-        if (songs != null) {
-            for (SongData song : songs) {
-                songListModel.addElement(song);
-            }
-        }
+        if (songsRack != null)
+            songsRack.refreshSongList();
     }
 
     // Group-related UI and actions are now handled by GroupRack.
@@ -461,18 +371,6 @@ public class AudioStudio implements ActionListener {
             transportRack.getTimeline().setCurrentTime(0);
             transportRack.getTimeline().setTotalTime(0);
             transportRack.setSong(null);
-        } else if (e.getSource() == openButton) {
-            ArrayList<File> files = app.fileManager.openFileDialog(FileManager.FileFilter.AUDIOFILE);
-            if (files != null) {
-                for (File file : files) {
-                    SongData song = app.actionHandler.addSong(file);
-                    if (song != null) {
-                        refreshSongList();
-                        songList.setSelectedValue(song, true);
-                        transportRack.setSong(song);
-                    }
-                }
-            }
         } else if (e.getSource() == closeButton) {
             mainWindow.dispose();
             System.exit(0);

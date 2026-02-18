@@ -1,12 +1,34 @@
 package gui.retro;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import data.SongData;
+import static gui.retro.RetroTheme.LCD_BACKGROUND;
+import static gui.retro.RetroTheme.LCD_FONT;
+import static gui.retro.RetroTheme.LCD_TEXT;
+import static gui.retro.RetroTheme.LCD_TEXT_SELECTED;
+import static gui.retro.RetroTheme.PANEL_DARK_SHADOW;
+import static gui.retro.RetroTheme.PANEL_SHADOW;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import data.ProjectArtistData;
-import java.util.List;
-import static gui.retro.RetroTheme.*;
+import data.SongData;
 
 /**
  * LCD-style panel for displaying currently playing song info, with expandable
@@ -31,24 +53,28 @@ public class SongLCDPanel extends JPanel {
         // more compact height for the LCD song line
         setPreferredSize(new Dimension(260, 28));
         setLayout(new BorderLayout());
-        expandButton = new JButton("▶");
-        expandButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        expandButton = new JButton(" ");
+        expandButton.setFont(new Font("SansSerif", Font.PLAIN, 8));
         expandButton.setFocusPainted(false);
         expandButton.setBorderPainted(false);
         expandButton.setContentAreaFilled(false);
         expandButton.setForeground(LCD_TEXT);
         expandButton.setMargin(new Insets(0, 0, 0, 0)); // Remove inner padding
-        expandButton.setPreferredSize(new Dimension(34, 24));
+        expandButton.setPreferredSize(new Dimension(48, 42));
         expandButton.addActionListener(e -> {
             expanded = !expanded;
-            expandButton.setText(expanded ? "▼" : "▶");
+            expandButton.setText(expanded ? "▼" : "◀");
             revalidate();
             Container p = getParent();
             if (p != null)
                 p.revalidate();
             repaint();
         });
-        add(expandButton, BorderLayout.EAST);
+        // anchor expand button to the top-right corner
+        JPanel eastPanel = new JPanel(new BorderLayout());
+        eastPanel.setOpaque(false);
+        eastPanel.add(expandButton, BorderLayout.NORTH);
+        add(eastPanel, BorderLayout.EAST);
 
         // mouse handling for clickable expanded items
         addMouseListener(new MouseAdapter() {
@@ -109,6 +135,13 @@ public class SongLCDPanel extends JPanel {
     }
 
     public void setSong(SongData song) {
+        if (expandButton != null) {
+            if (!expanded) {
+                expandButton.setText("◀");
+            } else {
+                expandButton.setText("▼");
+            }
+        }
         this.song = song;
         revalidate();
         repaint();

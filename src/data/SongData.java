@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class SongData extends Data {
-    
+
     String title;
     String guessedArtist;
     String subtitle;
@@ -13,6 +13,7 @@ public class SongData extends Data {
     Note note;
     ArrayList<ProjectArtistData> owners;
     ArrayList<Date> changeHistory;
+    VersionedSongData parent;
     transient long durationSeconds = -1;
 
     public String getTitle() {
@@ -80,5 +81,28 @@ public class SongData extends Data {
 
     public void setDurationSeconds(long durationSeconds) {
         this.durationSeconds = durationSeconds;
+    }
+
+    public VersionedSongData getParent() {
+        return parent;
+    }
+
+    public void setParent(VersionedSongData parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return super.toString();
+    }
+
+    // generate hash
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((filePath == null) ? 0 : filePath.hashCode());
+        return result;
     }
 }

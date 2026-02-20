@@ -7,7 +7,8 @@ public class GlobalData extends Data {
     public String guiStyle;
     public ArrayList<PlaylistData> playlists;
     public ArrayList<ProjectArtistData> projectsArtists;
-    public HashMap<String, SongData> songs;
+    public ArrayList<VersionedSongData> songs;
+    public HashMap<String, SongData> allSongs; // for quick lookup by file path
     public ArrayList<String> trackedFolders;
     public Object sortedByObject; // can be a playlist or a project/artist, used to sort the songs list in the UI
 
@@ -23,9 +24,22 @@ public class GlobalData extends Data {
         return projectsArtists;
     }
 
-    public ArrayList<SongData> getSongs() {
+    public ArrayList<VersionedSongData> getVersionedSongs() {
+        if (songs == null) {
+            songs = new ArrayList<>();
+        }
+        return songs;
+    }
+
+    public void removeVersionedSong(VersionedSongData versionedSongToRemove) {
         if (songs != null) {
-            return new ArrayList<>(songs.values());
+            songs.remove(versionedSongToRemove);
+        }
+    }
+
+    public ArrayList<SongData> getSongs() {
+        if (allSongs != null) {
+            return new ArrayList<>(allSongs.values());
         } else {
             return new ArrayList<>();
         }
@@ -33,7 +47,7 @@ public class GlobalData extends Data {
 
     public SongData getSong(String filePath) {
         if (songs != null) {
-            return songs.get(filePath);
+            return allSongs.get(filePath);
         } else {
             return null;
         }
@@ -75,17 +89,17 @@ public class GlobalData extends Data {
         this.sortedByObject = sortedByObject;
     }
 
-    public void putSong(SongData newSong) {
-        if (songs == null) {
-            songs = new HashMap<>();
+    public boolean putSong(SongData newSong) {
+        
+        if (allSongs == null) {
+            allSongs = new HashMap<>();
         }
-        songs.put(newSong.getFilePath(), newSong);
-    }
+        if (allSongs.containsValue(newSong)) {
+            return false;
+        }
 
-    public void removeSongByPath(String filePath) {
-        if (songs != null) {
-            songs.remove(filePath);
-        }
+        allSongs.put(newSong.getFilePath(), newSong);
+        return true;
     }
 
     public void addPlaylist(PlaylistData newPlaylist) {

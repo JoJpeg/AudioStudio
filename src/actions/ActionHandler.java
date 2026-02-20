@@ -8,6 +8,7 @@ import java.util.Map;
 
 import application.ApplicationResources;
 import data.SongData;
+import data.VersionedSongData;
 import data.PlaylistData;
 import data.ProjectArtistData;
 
@@ -36,8 +37,13 @@ public class ActionHandler {
             public Action execute() {
                 SongData newSong = new SongData();
                 newSong.setFilePath(file.getAbsolutePath());
+                boolean added = app.data.putSong(newSong);
+                if (!added) {
+                    // Song already exists, do not add again
+                    return this; // Return the action itself for undo functionality, even though we didn't add a
+                                 // new song.
+                }
                 this.actionData = newSong; // Store the newSong in the action's data for undo/redo purposes.
-                app.data.putSong(newSong);
                 String guessedTitle = "";
                 String guessedArtist = "";
 
@@ -51,8 +57,8 @@ public class ActionHandler {
                 if (filename.contains(".")) {
                     filename = filename.substring(0, filename.lastIndexOf('.'));
                 }
-                if (filename.contains(" - ")) {
-                    String[] parts = filename.split(" - ");
+                if (filename.contains("-")) {
+                    String[] parts = filename.split("-");
                     if (parts.length >= 2) {
                         guessedArtist = parts[0].trim();
                         guessedTitle = parts[1].trim();
@@ -62,14 +68,30 @@ public class ActionHandler {
                 newSong.setTitle(guessedTitle);
                 newSong.setGuessedArtist(guessedArtist);
 
+                // add this to a new versionedSongData
+                // so that user can later add this to an actual versionedSongData
+                // if there is one
+
+                VersionedSongData vsd = new VersionedSongData();
+                vsd.addSong(newSong);
+
+                
+
+                app.data.getVersionedSongs().add(vsd);
                 app.fileManager.saveGlobals();
                 return this; // Return the action itself for undo functionality.
             }
 
             @Override
             public Action undo() {
+                if(actionData == null) {
+                    return this; // Nothing to undo
+                }
                 app.data.removeSong(this.actionData);
+                app.data.removeVersionedSong(this.actionData.getParent());
+
                 app.fileManager.saveGlobals();
+
                 return this; // Return the action itself for redo functionality.
             }
 
